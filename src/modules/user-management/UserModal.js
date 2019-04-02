@@ -100,7 +100,7 @@ class UserModal extends React.Component {
                         label={<FormattedMessage id="PASSWORD" />}>
                         {getFieldDecorator('password',
                             { rules: [{ required: true, message: this.props.t('REQUIRED_PASSWORD') }] })(
-                                <Input maxLength={12} placeholder={this.props.t('INPUT_PASSWORD')} />)}
+                                <Input maxLength={12} type="password" placeholder={this.props.t('INPUT_PASSWORD')} />)}
                     </FormItem>
 
                     <FormItem
