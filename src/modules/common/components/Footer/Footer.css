@@ -1,0 +1,11 @@
+.ant-layout-footer {
+  position: relative;
+  z-index: 1;
+  color: #7c8695;
+  text-align: center;
+  line-height: 0;
+  font-size: .87rem;
+  padding: 30px;
+  border-top: 1px solid rgba(0, 0, 0, 0.0625);
+  background: #fff;
+}

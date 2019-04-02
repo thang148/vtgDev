@@ -1,0 +1,6 @@
+export const SWITCH_LOCALE = 'SWITCH_LOCALE';
+export const SWITCH_THEME = 'SWITCH_LOCALE';
+export const ADD_LOADING = 'ADD_LOADING';
+export const REMOVE_LOADING = 'REMOVE_LOADING';
+export const REQUEST_LOGIN = 'REQUEST_LOGIN';
+export const REQUEST_LOGOUT = 'REQUEST_LOGOUT';

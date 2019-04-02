@@ -1,0 +1,12 @@
+{
+  "colorPrimary": "#344955",
+  "colorPrimaryDark": "#232F34",
+  "colorAccent": "#F9AA33",
+  "colorButtonNormal": "#344955",
+  "colorControlNormal": "#344955",
+  "colorControlActivated": "#232F34",
+  "colorControlHighlight": "#232F34",
+  "txtColorPrimary": "#333",
+  "textColorPrimaryDark": "#000",
+  "borderRadius": "4px"
+}

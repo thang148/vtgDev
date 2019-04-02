@@ -1,0 +1,13 @@
+{
+  "compilerOptions": {
+    "baseUrl": "",
+    "paths": {
+      "utils": ["./src/utils"],
+      "intl": ["./src/utils/HOC/intl"],
+      "consts": ["./src/utils/constants"],
+      "components": ["./src/modules/common/components"],
+      "reduxModule": ["./src/reduxModule"],
+      "routerModule": ["./src/routerModule"]
+    }
+  }
+}
