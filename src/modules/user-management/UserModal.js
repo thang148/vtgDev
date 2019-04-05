@@ -14,6 +14,7 @@ const ListRole = [
     { label: 'Soccial User', value: 'SOCIAL_USER' },
     { label: 'User', value: 'USER' }
 ]
+
 class UserModal extends React.Component {
 
     onDelete = (item, e) => {
@@ -29,7 +30,6 @@ class UserModal extends React.Component {
     onClose = (e) => {
         this.props.toggle();
     }
-
     onSubmit = () => {
         this.props.form.validateFields((err, values) => {
             if (!err) {
@@ -42,7 +42,7 @@ class UserModal extends React.Component {
                     message.error(this.props.t("ERROR"));
                 }
                 if (this.props.addMode)
-                    Services.CreateUser(values)
+                    Services.CreateUser({ ...values })
                         .then(onSuccess)
                         .catch(onFail)
                 else
@@ -57,14 +57,16 @@ class UserModal extends React.Component {
         if (!prevProps.showModal && this.props.showModal) {
             const { data } = this.props;
             if (this.props.addMode)
-                this.props.form.resetFields(['username', 'password', 'email', 'phoneNumber', 'role'])
+                this.props.form.resetFields(['username', 'password', 'email', 'phoneNumber', 'role', 'status',
+                    'address', 'dateOfBirth', 'facebookId', 'fullname', 'gender', 'googleId', 'id', 'internationalPhoneNumber'])
             else
                 this.props.form.setFieldsValue({
                     username: data.username,
                     password: data.password,
                     email: data.email,
                     phoneNumber: data.phoneNumber,
-                    role: data.role
+                    role: data.role,
+                    status: data.status
                 })
         }
     }
@@ -123,7 +125,7 @@ class UserModal extends React.Component {
                         {...formItemLayout}
                         label={<FormattedMessage id="ROLE" />}>
                         {getFieldDecorator('role',
-                            { rules: [{ required: true, message: this.props.t('REQUIRED_STATUS') }] })(
+                            { rules: [{ required: true, message: this.props.t('REQUIRED_ROLE') }] })(
                                 <Select style={{ width: 200 }} placeholder={this.props.t("INPUT_ROLE")}                                 >
                                     {ListRole.map((item, key) => {
                                         return (
@@ -139,8 +141,11 @@ class UserModal extends React.Component {
                         label={<FormattedMessage id="STATUS" />}>
                         {getFieldDecorator('status',
                             { rules: [{ required: true, message: this.props.t('REQUIRED_STATUS') }] })(
-                                <Input maxLength={15} placeholder={this.props.t('INPUT_STATUS')}
-                                />)}
+                                <Select style={{ width: 200 }} placeholder={this.props.t("INPUT_STATUS")}                                 >
+                                    <Option value="ACTIVE"><FormattedMessage id="OPEN" /></Option>
+                                    <Option value="INACTIVE"><FormattedMessage id="CLOSE" /></Option>
+                                </Select>
+                            )}
                     </FormItem>
                 </Form>
             </Modal>

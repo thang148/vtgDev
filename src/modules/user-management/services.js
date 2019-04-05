@@ -1,6 +1,6 @@
 import axios from 'utils/api';
 export function getAllUser(params) {
-    return axios.get('api/user/get-all', { params });
+    return axios.get('/api/user/get-all-filter', { params });
 }
 
 export function CreateUser(data) {

@@ -1,6 +1,8 @@
 import React from 'react';
 import Upload from 'components/Upload';
 import { Modal, Form, message, Icon, Input } from 'antd';
+import { UpdateUtils, UpdateService } from "./sevices";
+
 
 class UtilsModal extends React.Component {
   state = { loading: false }
@@ -20,19 +22,30 @@ class UtilsModal extends React.Component {
   componentDidUpdate(preProps) {
     if (!preProps.visible && this.props.visible) {
       const { setFieldsValue, resetFields } = this.props.form;
-      if (this.props.addMode) {
-        resetFields(['name', 'icon'])
-      } else {
-        setFieldsValue({ name: this.props.data.name })
-      }
+      resetFields(['icon'])
+      setFieldsValue({ description: this.props.data.description })
     }
   }
 
   onSubmit = () => {
     this.props.form.validateFields((error, values) => {
       if (!error) {
-        console.log(values, error);
-        this.props.toggle();
+        const data = {
+          ...this.props.data,
+          ...values,
+          icon: values.icon[0].response.name,
+        }
+        if (this.props.isUtils) {
+          UpdateUtils(data).then(() => {
+            this.props.fetch();
+          }).catch(() => { });
+          this.props.toggle();
+        } else {
+          UpdateService(data).then(() => {
+            this.props.fetch();
+          }).catch(() => { });
+          this.props.toggle();
+        }
       }
     })
   }
@@ -71,7 +84,7 @@ class UtilsModal extends React.Component {
           visible={this.props.visible}
           confirmLoading={this.state.loading}>
           <Form.Item label={nameTitle}>
-            {getFieldDecorator('name',
+            {getFieldDecorator('description',
               { rules: [{ required: true, message: required }] })(
                 <Input placeholder={placeholder} maxLength={50} />)}
           </Form.Item>
@@ -82,7 +95,7 @@ class UtilsModal extends React.Component {
               getValueFromEvent: this.checkFileUpload,
               rules: [{ required: true, message: this.props.t('ICON_REQUIRED') }]
             })(
-              <Upload listType="picture-card">
+              <Upload listType="picture-card" isWatermark={true}>
                 {showUploadIcon && <span>
                   <Icon type="plus" />
                   {this.props.t('ACT_UPLOAD')}
